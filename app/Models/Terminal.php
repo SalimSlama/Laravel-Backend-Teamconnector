@@ -9,15 +9,11 @@ class Terminal extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'NomTerminal',
-        'TerminalID', 
-        'NiveauDeBatterie', 
-        'Memoire', 
-        'Lattitude', 
-        'Longitude', 
-        'Fabriquant', 
-        'Modele', 
-        'VersionSE'
+        'nom'
     ];
     public $timestamp=false;
+
+    public function etats_terminal(){
+        return $this->hasMany(EtatTerminal::class);
+    }
 }

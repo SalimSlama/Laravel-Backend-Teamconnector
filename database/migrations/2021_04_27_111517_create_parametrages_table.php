@@ -14,7 +14,7 @@ class CreateParametragesTable extends Migration
     public function up()
     {
         Schema::create('parametrages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('nom_parametre');
             $table->string('valeur');
             $table->timestamps();

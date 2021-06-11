@@ -14,17 +14,13 @@ class CreateTerminalsTable extends Migration
     public function up()
     {
         Schema::create('terminals', function (Blueprint $table) {
-            $table->id();
-            $table->string('NomTerminal');
-            $table->string('TerminalID');
-            $table->String('NiveauDeBatterie');
-            $table->string('Memoire');
-            $table->string('Lattitude');
-            $table->string('Longitude');
-            $table->string('Fabriquant');
-            $table->string('Modele');
-            $table->string('VersionSE');
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('etat_id');
+            $table->string('nom');
+            $table->string('Android_id');
             $table->timestamps();
+        
+            $table->foreign('etat_id')->references('id')->on('etat_terminals');
         });
     }
 

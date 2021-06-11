@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\EtatTerminalController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TypeEtatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,10 +20,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post("addTypeetat",[TypeEtatController::class,'add']);
-Route::get("getallTypeetat",[TypeEtatController::class,'getall']);
-Route::get("getOneTypeetat/{id}",[TypeEtatController::class,'getOne']);
-Route::delete("deleteTypeetat/{id}",[TypeEtatController::class,'delete']);
-Route::put("updateTypeetat/{id}",[TypeEtatController::class,'update']);
+Route::post("addEtatTerminal",[EtatTerminalController::class,'add']);
+Route::get("getallEtatTerminal",[EtatTerminalController::class,'getall']);
+Route::get("getOneEtatTerminal/{id}",[EtatTerminalController::class,'getOne']);
+Route::delete("deleteEtatTerminal/{id}",[EtatTerminalController::class,'delete']);
+Route::put("updateEtatTerminal/{id}",[EtatTerminalController::class,'update']);
+Route::get("aa",[UserController::class,'index']);
+Route::get("/user",[UserController::class,'user'])->middleware('auth:api');
+Route::post("register",[UserController::class,'register']);
+Route::post("login",[UserController::class,'login']);
+Route::get("getallusers",[UserController::class,'getall']);
+Route::get("getlast",[EtatTerminalController::class,'getLast']);
+
+
 
 

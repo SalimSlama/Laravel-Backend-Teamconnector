@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEtatTerminalsTable extends Migration
+class CreateUtilisateursTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateEtatTerminalsTable extends Migration
      */
     public function up()
     {
-        Schema::create('etat_terminals', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('nom_etat');
-            $table->foreign('nom_etat')->references('id')->on('type_etats');
-            $table->string('valeur');
-            $table->string('date_time');
+        Schema::create('utilisateurs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nom');
+            $table->string('prenom');
+            $table->string('adresse');
+            $table->string('email')->unique();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateEtatTerminalsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('etat_terminals');
+        Schema::dropIfExists('utilisateurs');
     }
 }

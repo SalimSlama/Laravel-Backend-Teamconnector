@@ -11,9 +11,20 @@ class EtatTerminal extends Model
     protected $table = 'etat_terminals';
 
     protected $fillable = [
-        'nom_etat', 
-        'valeur', 
-        'date_time'
+        'Android_id',
+        'NiveauDeBatterie',
+        'Memoire',
+        'Lattitude',
+        'Longitude',
+        'Fabriquant',
+        'Modele',
+        'VersionSE', 
+       // 'valeur', 
+        //'date_time'
     ];
     public $timestamp=false;
+
+    public function terminal() {
+        return $this->belongsTo(Terminal::class);
+    }
 }

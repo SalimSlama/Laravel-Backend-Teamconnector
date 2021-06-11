@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TypeEtat;
 
-class TypeEtatController extends Controller
+class TypeEtatController extends BaseController
 {
   //méthode d'ajout un élement
     public function add(Request $req)

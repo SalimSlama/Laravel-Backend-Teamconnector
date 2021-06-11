@@ -14,10 +14,10 @@ class TypeEtat extends Model
         'TerminalID',
         'NiveauDeBatterie',
         'Memoire',
-        'Lattitude', 
-        'Longitude', 
-        'Fabriquant', 
-        'Modele', 
+        'Lattitude',
+        'Longitude',
+        'Fabriquant',
+        'Modele',
         'VersionSE'
     ];
     public $timestamp=false;

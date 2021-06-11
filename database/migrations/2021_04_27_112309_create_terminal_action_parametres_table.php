@@ -14,14 +14,16 @@ class CreateTerminalActionParametresTable extends Migration
     public function up()
     {
         Schema::create('terminal_action_parametres', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_etat_terminal');
-            $table->foreign('id_etat_terminal')->references('id')->on('etat_terminals');
-            $table->unsignedBigInteger('id_parametre');
-            $table->foreign('id_parametre')->references('id')->on('parametrages');
-            $table->unsignedBigInteger('id_action');
-            $table->foreign('id_action')->references('id')->on('actions');
+            $table->increments('id');
+            $table->unsignedBigInteger('etat_terminal_id');
+            $table->unsignedBigInteger('action_id');
+            $table->unsignedBigInteger('parametrage_id');
+
             $table->timestamps();
+
+            $table->foreign('etat_terminal_id')->references('id')->on('etat_terminals');
+            $table->foreign('action_id')->references('id')->on('actions');
+            $table->foreign('parametrage_id')->references('id')->on('parametrages');
         });
     }
 
