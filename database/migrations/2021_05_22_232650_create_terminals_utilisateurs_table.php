@@ -17,8 +17,8 @@ class CreateTerminalsUtilisateursTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('terminal_id');
             $table->unsignedBigInteger('utilisateur_id');
-            $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date_debut')->nullable();
+            $table->date('date_fin')->nullable();
             $table->timestamps();
 
             $table->foreign('terminal_id')->references('id')->on('terminals');

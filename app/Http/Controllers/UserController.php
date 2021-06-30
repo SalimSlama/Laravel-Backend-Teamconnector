@@ -65,7 +65,7 @@ class UserController extends BaseController
         //             'scope' => '*',
         //         ],
         //     ]);
-            
+
         //     return json_decode((string) $response->getBody(), true);
 
         // } else {
@@ -74,19 +74,36 @@ class UserController extends BaseController
         if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] = $user->createToken('appToken')->accessToken;
-            dd($success['token']);
-           //After successfull authentication, notice how I return json parameters
+            //After successfull authentication, notice how I return json parameters
             return response()->json([
-              'success' => true,
-              'token' => $success,
-              'user' => $user
-          ]);
+                'success' => true,
+                'token' => $success['token']
+            ]);
         } else {
-       //if authentication is unsuccessfull, notice how I return json parameters
-          return response()->json([
-            'success' => false,
-            'message' => 'Invalid Email or Password',
-        ], 401);
+            //if authentication is unsuccessfull, notice how I return json parameters
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid Email or Password',
+            ], 401);
         }
+    }
+
+    public function deleteadmin(Request $request)
+    {
+        $id = $request->id;
+        $administrateur = User::find($id);
+        $administrateur->delete();
+
+        return $administrateur;
+    }
+    public function getoneadmin(int $id)
+    {
+        // $bool = false;
+        // $bool = is_int($id);
+
+        if (is_int($id))
+            return User::find($id);
+        // else
+        //     return 'gggg';
     }
 }

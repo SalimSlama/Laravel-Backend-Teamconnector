@@ -17,8 +17,8 @@ class CreateDepartementsUtilisateursTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('departement_id');
             $table->unsignedBigInteger('utilisateur_id');
-            $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date_debut')->nullable();
+            $table->date('date_fin')->nullable();
             $table->timestamps();
 
             $table->foreign('departement_id')->references('id')->on('departements');

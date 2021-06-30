@@ -19,6 +19,7 @@ class EtatTerminal extends Model
         'Fabriquant',
         'Modele',
         'VersionSE', 
+        'terminal_id'
        // 'valeur', 
         //'date_time'
     ];

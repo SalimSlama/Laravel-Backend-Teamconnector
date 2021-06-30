@@ -13,7 +13,8 @@ class Utilisateur extends Model
         'nom',
         'prenom',
         'adresse',
-        'email'
+        'email',
+        'departement_id'
     ];
     public $timestamp=false;
     
