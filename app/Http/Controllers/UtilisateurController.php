@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departement;
 use App\Models\Utilisateur;
 use App\Models\DepartementsUtilisateur;
 use Illuminate\Http\Request;
-Use \Carbon\Carbon;
-class UtilisateurController extends BaseController
+use \Carbon\Carbon;
+
+class UtilisateurController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,13 +27,6 @@ class UtilisateurController extends BaseController
      */
     public function add(Request $req)
     {
-        // $utilisateur = new Utilisateur();
-        // $utilisateur->nom = $req->nom;
-        // $utilisateur->prenom = $req->prenom;
-        // $utilisateur->adresse = $req->adresse;
-        // $utilisateur->email = $req->email;
-
-        // $result = $utilisateur->save();
         $result = Utilisateur::create(
             [
                 'nom' => $req->nom,
@@ -40,9 +35,8 @@ class UtilisateurController extends BaseController
                 'email' => $req->email,
             ]
         );
-        //var_dump($result);exit;
         $utilisateurdepartement = new DepartementsUtilisateur();
-        $utilisateurdepartement->departement_id =$req->departement_id;
+        $utilisateurdepartement->departement_id = $req->departement_id;
         $utilisateurdepartement->utilisateur_id = $result->id;
         $utilisateurdepartement->date_debut =  Carbon::now();
         $utilisateurdepartement->date_fin = Carbon::now();
@@ -55,45 +49,13 @@ class UtilisateurController extends BaseController
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
     public function getAll()
     {
         $utilisateur = Utilisateur::get()->toJson(JSON_PRETTY_PRINT);
         return response($utilisateur, 200);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
-    public function editutilisateur(Request $request,int $id){
-        // if($id != null){
-        //     Utilisateur::where('id', $id)->update($request->all());
-        // }
+    public function editutilisateur(Request $request, int $id)
+    {
         $utilisateur = Utilisateur::find($id);
         $utilisateur->nom = $request->input('nom');
         $utilisateur->prenom = $request->input('prenom');
@@ -106,26 +68,26 @@ class UtilisateurController extends BaseController
             'customer'  => $utilisateur,
         ], 200);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Utilisateur  $utilisateur
-     * @return \Illuminate\Http\Response
-     */
     public function deleteutilisateur(Request $request)
     {
-        $id=$request->id;
-        $utilisateur= Utilisateur::find($id);
+        $id = $request->id;
+        $utilisateur = Utilisateur::find($id);
         $utilisateur->delete();
 
         return $utilisateur;
-        
-
     }
 
     public function getoneutilisateur(int $id)
     {
         return Utilisateur::find($id);
+    }
+    public function restoreutilisateur(int $id)
+    {
+        Utilisateur::withTrashed()->find($id)->restore();
+    }
+    public function getOnlyTrashed()
+    {
+        $utilisateur = Utilisateur::onlyTrashed()->get()->toJson(JSON_PRETTY_PRINT);
+        return response($utilisateur, 200);
     }
 }

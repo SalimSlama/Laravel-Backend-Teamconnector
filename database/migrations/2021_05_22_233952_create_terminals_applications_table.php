@@ -20,6 +20,7 @@ class CreateTerminalsApplicationsTable extends Migration
             $table->date('date_debut');
             $table->date('date_fin');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('terminal_id')->references('id')->on('terminals');
             $table->foreign('application_id')->references('id')->on('applications');

@@ -41,7 +41,12 @@ class UserController extends BaseController
             'adresse' => $request->adresse,
             'password' => bcrypt($request->password)
         ]);
-        return response()->json($user);
+        return response()->json(
+            [
+                $user,
+                'message' => 'administrateur crée avec succés'
+            ]
+        );
     }
 
     public function login(request $request, loginValidators $validation)
@@ -83,7 +88,7 @@ class UserController extends BaseController
             //if authentication is unsuccessfull, notice how I return json parameters
             return response()->json([
                 'success' => false,
-                'message' => 'Invalid Email or Password',
+                'message' => 'Email ou mot de passe incorrecte',
             ], 401);
         }
     }
@@ -105,5 +110,25 @@ class UserController extends BaseController
             return User::find($id);
         // else
         //     return 'gggg';
+    }
+
+    public function edituser(Request $request, int $id)
+    {
+        // if($id != null){
+        //     Utilisateur::where('id', $id)->update($request->all());
+        // }
+        $user = User::find($id);
+        $user->nom = $request->input('nom');
+        $user->prenom = $request->input('prenom');
+        $user->email = $request->input('email');
+        $user->adresse = $request->input('adresse');
+        if ($request->password != '')
+            $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return response()->json([
+            'error' => false,
+            'customer'  => $user,
+        ], 200);
     }
 }

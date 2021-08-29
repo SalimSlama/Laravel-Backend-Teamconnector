@@ -29,10 +29,34 @@ class DepartementController extends Controller
 
     public function deletedep(Request $request)
     {
-        $id=$request->id;
-        $dep= Departement::find($id);
+        $id = $request->id;
+        $dep = Departement::find($id);
         $dep->delete();
 
         return $dep;
+    }
+    public function editdepartement(Request $request, int $id)
+    {
+        $dep = Departement::find($id);
+        $dep->nom = $request->input('nom');
+        $dep->save();
+
+        return response()->json([
+            'error' => false,
+            'customer'  => $dep,
+        ], 200);
+    }
+    public function getonedepartement(int $id)
+    {
+        return Departement::find($id);
+    }
+    public function restoredepartement(int $id)
+    {
+        Departement::withTrashed()->find($id)->restore();
+    }
+    public function getOnlyTrashed()
+    {
+        $departement = Departement::onlyTrashed()->get()->toJson(JSON_PRETTY_PRINT);
+        return response($departement, 200);
     }
 }

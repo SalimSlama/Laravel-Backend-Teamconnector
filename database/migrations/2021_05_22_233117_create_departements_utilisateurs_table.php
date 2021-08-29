@@ -23,6 +23,7 @@ class CreateDepartementsUtilisateursTable extends Migration
 
             $table->foreign('departement_id')->references('id')->on('departements');
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
+            $table->softDeletes();
         });
     }
 

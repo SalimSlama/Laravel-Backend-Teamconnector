@@ -26,8 +26,7 @@ class CreateEtatTerminalsTable extends Migration
             //$table->string('valeur')->nullable();
             //$table->dateTime('dates')->nullable();
             $table->timestamps();
-            
-
+            $table->softDeletes();
         });
     }
 

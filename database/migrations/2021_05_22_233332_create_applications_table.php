@@ -20,6 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->string('date_de_creation');
             $table->string('date_de_suppression');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateUtilisateursTable extends Migration
             $table->string('adresse');
             $table->string('email')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

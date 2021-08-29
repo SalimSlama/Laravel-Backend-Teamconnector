@@ -23,6 +23,7 @@ class CreateTerminalsUtilisateursTable extends Migration
 
             $table->foreign('terminal_id')->references('id')->on('terminals');
             $table->foreign('utilisateur_id')->references('id')->on('utilisateurs');
+            $table->softDeletes();
         });
     }
 

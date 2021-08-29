@@ -18,6 +18,7 @@ class CreateParametragesTable extends Migration
             $table->string('nom_parametre');
             $table->string('valeur');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

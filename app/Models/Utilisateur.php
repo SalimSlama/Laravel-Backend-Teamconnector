@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Utilisateur extends Model
 {
@@ -16,7 +18,13 @@ class Utilisateur extends Model
         'email',
         'departement_id'
     ];
-    public $timestamp=false;
-    
+    public $timestamp = false;
+
     use HasFactory;
+    use SoftDeletes;
+
+    public function departement()
+    {
+        return $this->belongsToMany(Departement::class, 'departements_utilisateurs');
+    }
 }

@@ -17,6 +17,7 @@ class CreateActionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('nom_action');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

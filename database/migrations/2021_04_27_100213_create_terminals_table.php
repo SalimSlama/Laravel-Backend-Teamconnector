@@ -15,12 +15,12 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('etat_id');
-            $table->string('nom');
-            $table->string('Android_id');
+            $table->string('Android_id')->unique();
+            $table->string('nom')->nullable();
             $table->timestamps();
-        
-            $table->foreign('etat_id')->references('id')->on('etat_terminals');
+            $table->softDeletes();
+
+            //$table->foreign('Android_id')->references('Android_id')->on('etat_terminals');
         });
     }
 

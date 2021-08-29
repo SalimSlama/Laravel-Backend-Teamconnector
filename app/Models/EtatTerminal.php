@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class EtatTerminal extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
     protected $table = 'etat_terminals';
 
     protected $fillable = [
@@ -18,14 +22,12 @@ class EtatTerminal extends Model
         'Longitude',
         'Fabriquant',
         'Modele',
-        'VersionSE', 
-        'terminal_id'
-       // 'valeur', 
-        //'date_time'
+        'VersionSE'
     ];
-    public $timestamp=false;
+    public $timestamp = false;
 
-    public function terminal() {
+    public function terminal()
+    {
         return $this->belongsTo(Terminal::class);
     }
 }

@@ -24,6 +24,7 @@ class CreateTerminalActionParametresTable extends Migration
             $table->foreign('etat_terminal_id')->references('id')->on('etat_terminals');
             $table->foreign('action_id')->references('id')->on('actions');
             $table->foreign('parametrage_id')->references('id')->on('parametrages');
+            $table->softDeletes();
         });
     }
 
