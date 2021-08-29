@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EtatTerminal;
 use App\Models\Terminal;
 use Illuminate\Http\Request;
 
@@ -22,18 +23,18 @@ class TerminalController extends Controller
     }
     public function getAll()
     {
-        $Terminaux = Terminal::get()->toJson(JSON_PRETTY_PRINT);
+        $Terminaux = Terminal::get();
+        foreach ($Terminaux as $R) {
+            $etat = EtatTerminal::where('Android_id', $R->Android_id)->orderByDesc('id')->first();
+            $R->etats = $etat;
+        }
         return response($Terminaux, 200);
     }
-    public function editTerminal(Request $request, int $id)
+    public function editTerminal(Request $request, $Android_id)
     {
-        // if($id != null){
-        //     Utilisateur::where('id', $id)->update($request->all());
-        // }
-        $terminal = Terminal::find($id);
+        $terminal = Terminal::whereAndroidId($Android_id)->first();
         $terminal->nom = $request->input('nom');
         $terminal->save();
-
         return response()->json([
             'error' => false,
             'customer'  => $terminal,
